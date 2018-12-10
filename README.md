@@ -3,7 +3,7 @@ Columbia University Engineering - IoT Final Project 2018: Spoony, your smart spo
 
 This repository contains all the code to implement our IoT device:  Spoony, your smart spoon. Contributors are Jan-Felix Schneider, Sing Pou Lee and Tvisha Gangwani.
 
-<img align="center" src="images/prize.jpeg" alt="drawing" width="900"/>
+<img align="center" src="images/prize.jpeg" alt="drawing" width="500"/>
 
 # Brief description of project
 Understanding that many people wish to have a healthier diet and track what they are eating but find it inconvenient to do so, we want to build a practical, functional spoon that can do all that for us automatically. 
