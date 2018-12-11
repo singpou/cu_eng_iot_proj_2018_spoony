@@ -6,6 +6,7 @@ This repository contains all the code to implement our IoT device:  Spoony, your
 <p align="center"> 
 <img src="images/prize.jpeg" alt="drawing" width="500"/>
 </p>
+<p align="center">*Our project won the 1st prize at the Columbia EE/CE Master Student Projects Expo 2018*</p> 
 
 # Brief description of project
 Understanding that many people wish to have a healthier diet and track what they are eating but find it inconvenient to do so, we want to build a practical, functional spoon that can do all that for us automatically. 
