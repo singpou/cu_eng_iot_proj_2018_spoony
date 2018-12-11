@@ -13,7 +13,7 @@ Understanding that many people wish to have a healthier diet and track what they
 The implementation of this spoon required the following fields of knowledge:  embedded systems - sensors & actuators, cloud computing for the server, data visualization for the dashboard and data science/deep learning for image recognition.  
 
 Please click on the link below to access our project website and video:
-<<to add url>>
+^^to add url^^
 
 # Organization of Files
 
