@@ -8,9 +8,9 @@ This repository provides the documentation and code for our IoT device:  Spoony,
 <p align="center"><i>Our project won the 1st prize at the Columbia EE/CE Master Student Projects Expo 2018</i></p> 
 
 # Brief Description of Project
-We understand that many people wish to have a healthier diet and track what they are eating but find it very cumbersome to do so (e.g., manual data entry on an app), we want to build a practical and functional spoon that can do all that for us automatically in a fun way. 
+We understand that many people wish to have a healthier diet and track what they are eating but find it very cumbersome to do so (e.g., manual data entry on an app). Therefore, we want to build a practical and functional spoon that can do all that for us automatically and in a fun way. 
 
-The implementation of this spoon required the following fields of knowledge:  embedded systems (sensors & actuators), cloud computing for the server, data visualization for the dashboard and data science/deep learning for image recognition.  
+The implementation of this spoon required the following fields of knowledge: embedded systems (sensors & actuators), cloud computing for the server, data visualization for the dashboard and data science/deep learning for image recognition.  
 
 Please click on the link below to access our project website and video:
 
