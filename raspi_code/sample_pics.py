@@ -2,6 +2,8 @@ from time import sleep
 from PIL import Image
 import os
 
+# This is a set of code which we ran to capture training images for our image recognition model.
+
 def crop_img(img_path, j, crop_ratio=1):
 
 	# crop_ratio defines what is the size of the cropped image as a % of size of original 
@@ -43,10 +45,11 @@ def takePic(cam, j, img_path, crop_ratio=0.6):
     cam.capture(img_path + 'image_{}.jpg'.format(j))
     cam.stop_preview()
     crop_img(img_path, j, crop_ratio)
-    #del camera
+    #del cam
     
     
-# test camera
+# test camera; we can increase/decrease the number of iterations depending on how many images
+# we want to capture for each class of food
 def test_cam():
     from picamera import PiCamera
     camera = PiCamera()

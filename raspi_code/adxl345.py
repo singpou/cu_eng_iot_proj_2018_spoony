@@ -7,6 +7,9 @@
 # the Adafruit Triple Axis ADXL345 breakout board:
 # http://shop.pimoroni.com/products/adafruit-triple-axis-accelerometer
 
+# This set of code allows us to take readings from the ACXL345 accelerometer, which will help us to detect if the
+# spoon is being picked up
+
 #import smbus
 from smbus2 import SMBus
 from time import sleep

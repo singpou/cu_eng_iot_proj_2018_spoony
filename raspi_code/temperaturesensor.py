@@ -1,3 +1,6 @@
+# The following  code reads in the temperature from the temperature sensor; it is with reference to:
+# https://cdn-learn.adafruit.com/downloads/pdf/adafruits-raspberry-pi-lesson-11-ds18b20-temperature-sensing.pdf
+
 import os
 import glob
 import time

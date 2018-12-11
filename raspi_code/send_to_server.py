@@ -4,7 +4,6 @@ import datetime
 
 # send the data
 # have a counter
-
 def send_data(temp, j, url):
     #j = 0
     
@@ -26,8 +25,6 @@ def send_data(temp, j, url):
             'filepath': path,
             'label': str(label)}
     print(local_image_path)
-
-    
 
     f = {'file': (path, open(local_image_path, 'rb'))}
 
