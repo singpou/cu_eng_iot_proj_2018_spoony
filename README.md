@@ -17,10 +17,10 @@ Please click on the link below to access our project website and video:
 
 # Organization of Files
 
-* _raspi_code_ sub-dir: contains all code that runs on our Pi. They are for our Pi to communicate with our sensors and actuators (accelerometer, pressure sensor, thermometer, camera, LED, OLED display) and to send and receive information from the server. `Main1.py` is the main file to run for operating Spoony; the functions in the rest of the files are called by the main file.  
+* *__raspi_code__* sub-dir: contains all code that runs on our Pi. They are for our Pi to communicate with our sensors and actuators (accelerometer, pressure sensor, thermometer, camera, LED, OLED display) and to send and receive information from the server. `Main1.py` is the main file to run for operating Spoony; the functions in the rest of the files are called by the main file.  
 
-* _server_code_ sub-dir: contains all code that runs on our server. It includes code to run our Convolutional Neural Network for image  classification and for our analytics dashboard.
+* *__server_code__* sub-dir: contains all code that runs on our server. It includes code to run our Convolutional Neural Network for image  classification and for our analytics dashboard.
 
-* _img_reg_model_code_ sub-dir: contains two notebooks for our image recognition. The first notebook contains code to build the  training dataset - resize images to correct dim; save images as numpy matrices. The second notebook contains code to build our image recognition model and train on our own training iamges - Transfer learning using Xception loaded with weights pre-trained on ImageNet with last fully-connected layer replaced with our own.
+* *__img_reg_model_code__* sub-dir: contains two notebooks for our image recognition. The first notebook contains code to build the  training dataset - resize images to correct dim; save images as numpy matrices. The second notebook contains code to build our image recognition model and train on our own training iamges - Transfer learning using Xception loaded with weights pre-trained on ImageNet with last fully-connected layer replaced with our own.
 
-* _images_ sub-dir: contains our team photo and social media app icons for our dashboard.
+* *__images__* sub-dir: contains our team photo and social media app icons for our dashboard.
