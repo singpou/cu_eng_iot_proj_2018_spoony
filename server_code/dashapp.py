@@ -10,14 +10,14 @@ from textwrap import dedent
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
-client = MongoClient('mongodb://34.201.135.161/cool_db')
+client = MongoClient('mongodb://18.209.62.51/cool_db')
 db = client.smartwatch_db
 # get the data from the database of a user and display it.
 
 def categorize_time(x):
     if x.hour < 11:
         return 'breakfast'
-    if x.hour < 14:
+    if x.hour < 13:
         return 'lunch'
     if x.hour < 18:
         return 'afternoon'
@@ -28,17 +28,17 @@ def categorize_time(x):
 def calculate_values(db):
     data = pd.DataFrame(list(db.spoondata_user.find()),
                         columns=['timestamp', 'food', 'foodtype', 'weight',
-                                 'calories', 'temperature'])
+                                 'calories', 'temperature']).round(decimals=1)
     data['timestamp'] = pd.to_datetime(data.timestamp)
     data['cat'] = data.timestamp.apply(lambda d: categorize_time(d))
     carbs = data[(data.timestamp.dt.date == datetime.datetime.now().date()) &
-                 (data.foodtype == 'carbs')].groupby('cat').sum().calories
+                 (data.foodtype == 'carbs')].groupby('cat').sum().calories.round(decimals=1)
 
     protein = data[(data.timestamp.dt.date == datetime.datetime.now().date()) &
-                   (data.foodtype == 'protein')].groupby('cat').sum().calories
+                   (data.foodtype == 'protein')].groupby('cat').sum().calories.round(decimals=1)
 
     veggies = data[(data.timestamp.dt.date == datetime.datetime.now().date()) &
-                   (data.foodtype == 'veggie')].groupby('cat').sum().calories
+                   (data.foodtype == 'veggie')].groupby('cat').sum().calories.round(decimals=1)
 
     calories_today = carbs.sum() + protein.sum() + veggies.sum()
     bites = data[(data.timestamp.dt.date ==
@@ -73,7 +73,7 @@ app.layout = html.Div(children=[
     html.Div([
         html.Div([
             html.Div([
-                html.H1('Spoony - your Smart Spoon'),
+                html.H1('Spooony - your Smart Spoon'),
             ], className="six columns"),
 
             html.Div([
@@ -125,8 +125,8 @@ app.layout = html.Div(children=[
         }
     ),
     dcc.Markdown(dedent('''
-     It is recommended, to always eat at the same time of your day, so your
-     body can adapt its digestive systems and hormons.
+     It is recommended, to always eat at the same time every day, so your
+     body can adapt its digestive system and hormones.
 
      ''')),
     dcc.Graph(
@@ -241,7 +241,7 @@ dcc.Markdown(dedent('''
 def refresh_values1(refresh, reset):
     if reset > refresh:
         db.spoondata_user.delete_many(
-            {"timestamp": {"$gt": '2018-12-02 18:00:07.402029'}})
+            {"timestamp": {"$gt": '2018-12-06 18:00:07.402029'}})
     carbs, protein, veggies, \
     calories_today, bites, favorite = calculate_values(db)
     return {
@@ -278,7 +278,7 @@ def refresh_values1(refresh, reset):
 def refresh_values2(refresh, reset):
     if reset > refresh:
         db.spoondata_user.delete_many(
-            {"timestamp": {"$gt": '2018-12-02 18:00:07.402029'}})
+            {"timestamp": {"$gt": '2018-12-06 18:00:07.402029'}})
     carbs, protein, veggies, \
     calories_today, bites, favorite = calculate_values(db)
     print('refresh values')

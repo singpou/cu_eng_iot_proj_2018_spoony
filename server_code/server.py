@@ -1,9 +1,6 @@
 from flask import Flask, request
 from pymongo import MongoClient
-import json
 import os
-import pandas as pd
-import numpy as np
 import pandas as pd
 from tensorflow.python.keras.models import load_model
 from PIL import Image
@@ -12,15 +9,15 @@ from process_data import *
 import re
 import datetime
 
-# return model
+# Connect to the MongoDB
 
-client = MongoClient('mongodb://34.201.135.161/cool_db')
+client = MongoClient('mongodb://18.209.62.51/cool_db')
 db = client.smartwatch_db
 
 UPLOAD_FOLDER = '/home/ec2-user/pictures'
 
 # load classification model
-model = load_model('ss_img_reg_model3.h5')
+model = load_model('ss_img_reg_model_final.h5')
 model._make_predict_function()
 
 #load food database
@@ -33,7 +30,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 
 # define processing functions
-def resize(path, dim=128):
+def resize(path, dim=384):
     """
     resize the image and convert it into a standard RGB format
     :param path:
@@ -63,9 +60,7 @@ def classify_food(filepath,
     print(filepath)
     x = resize(filepath)
     p = model.predict(np.expand_dims(x, 0))
-    categories = ['Bread', 'Cheese', 'Desserts', 'Egg', 'Chicken Nuggets',
-                  'Beef','Noodles', 'Rice', 'Fish', 'Soup',
-                  'Vegetables']
+    categories = ['Vegetables', 'Beef', 'Cheese', 'Bread', 'Desserts']
     c = categories[p.argmax()]
     print('classify food done')
 
@@ -87,8 +82,16 @@ def get_calories_percentage(db):
     data['timestamp'] = pd.to_datetime(data.timestamp)
     calories = data[(data.timestamp.dt.date ==
                      datetime.datetime.now().date())].sum().calories
-    return 100
-    #return int((calories / 2700) * 100)
+    return int((calories / 2700) * 100)
+
+def get_no_of_bites(db):
+    data = pd.DataFrame(list(db.spoondata_user.find()),
+                        columns=['timestamp', 'food', 'foodtype', 'weight',
+                                 'calories', 'temperature'])
+    data['timestamp'] = pd.to_datetime(data.timestamp)
+    bites = data[(data.timestamp.dt.date ==
+                     datetime.datetime.now().date())].shape[0]
+    return int(bites)
 
 
 def process_classify_data(filepath, dict, food_dict, model):
@@ -144,11 +147,32 @@ def save_request1():
         print('No selected file')
         return ""
     if file:
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        file.save(os.path.join(app.config['UPLOAD_FOLDER' ], filename))
         print('picture saved')
         return "Picture Saved"
     else:
         return ""
+
+@app.route('/save_picture_label/', methods=['POST', 'GET'])
+def save_request_label():
+    if 'file' not in request.files:
+        print('No file part')
+        return ""
+    file = request.files['file']
+    filename = file.filename
+
+    if file.filename == '':
+        print('No selected file')
+        return ""
+    if file:
+        x = filename.split("_")
+
+        file.save(os.path.join(app.config['UPLOAD_FOLDER/'+x[0]], x[1]))
+        print('picture saved')
+        return "Picture Saved"
+    else:
+        return ""
+
 
 @app.route('/accelerometer/', methods=['POST', 'GET'])
 def save_accelerometer():
@@ -172,7 +196,9 @@ def save_request2():
                                        model=model)
     result2 = db.spoondata_user.insert_one(clean_data)
     cal_perc = get_calories_percentage(db)
+    bites = get_no_of_bites(db)
     clean_data['cal_perc'] = cal_perc
+    clean_data['bites'] = bites
     print(clean_data)
     clean_data.pop('_id')
 
