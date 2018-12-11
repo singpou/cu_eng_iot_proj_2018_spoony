@@ -18,7 +18,10 @@ Please click on the link below to access our project website and video:
 
 # Organization of Files
 
-* *__raspi_code__* sub-dir: contains all code to run on our Pi. They are for our Pi to communicate with our sensors and actuators (accelerometer, pressure sensor, thermometer, camera, LED, OLED display) and to send and receive information from the server. `Main1.py` is the main file to run for Spoony; the functions in the rest of the files are called by the main file.  
+* *__raspi_code__* sub-dir: contains all code to run on our Pi. They are for our Pi to communicate with our sensors and actuators (accelerometer, pressure sensor, thermometer, camera, LED, OLED display) and to send and receive information from the server. 
+
+`main1.py` is the main file to run for Spoony; the functions in the rest of the files are called by the main file.  
+
 * *__server_code__* sub-dir: contains all code that runs on our server. It includes code to run our trained Convolutional Neural Network (CNN) model for image classification and for our analytics dashboard.
 
 * *__img_reg_model_code__* sub-dir: contains two notebooks for our image recognition task. The first notebook contains code to process our training dataset - resize images to the desired dimensions; save images as numpy matrices. The second notebook contains code to build our image recognition model and train it on our own food images - building the model involved transfer learning from Xception which was loaded with weights pre-trained on ImageNet, with the last fully-connected layer replaced with our own.
